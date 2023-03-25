@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Welcome</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToCart()" class="cart">
+        <ion-icon name="cart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-item-divider sticky style="border: 0">
+    <ion-searchbar> </ion-searchbar
+  ></ion-item-divider>
+  <!-- <ion-item-divider> -->
+  <!-- <ion-toolbar class="padding">
+      <ion-tabs>
+        <ion-tab-bar slot="top">
+          <ion-tab-button tab="speakers">
+            <ion-label>All</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button tab="map">
+            <ion-label>Product #1</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button tab="about">
+            <ion-label>Product #2</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-toolbar> -->
+  <!-- </ion-item-divider> -->
+  <ion-refresher
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="60"
+    pullMax="250"
+    (ionPull)="ionPull($event)"
+    (ionStart)="ionStart($event)"
+    slot="fixed"
+    (ionRefresh)="handleRefresh($event)"
+  >
+    <ion-refresher-content
+      pullingIcon="arrow-down"
+      pullingText="Pull to refresh..."
+    ></ion-refresher-content>
+  </ion-refresher>
+  <!-- <ion-virtual-scroll [items]="items" approximateHeight="135">
+    <ion-card
+      *virtualItem="let item"
+      class="welcome-card"
+      [style.height.px]="item.height"
+      (click)="goToProduct()"
+    >
+      <ion-card-header>
+        <ion-card-title>Welcome to Ionic</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          Now that your app has been created, you'll want to start building out
+          features and components. Check out some of the resources below for
+          next steps.
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </ion-virtual-scroll> -->
+  <ion-virtual-scroll [items]="items" approximateHeight="135">
+    <ion-card *virtualItem="let items" (click)="goToProduct(items)">
+      <ion-row>
+        <ion-col>
+          <img src={{items.imageUrl}} />
+        </ion-col>
+        <ion-col>
+          &nbsp;
+          <ion-title>{{items.product}}</ion-title>
+          <ion-title>{{items.price}}</ion-title>
+        </ion-col>
+      </ion-row>
+
+      <ion-footer>
+        <ion-button ion-button color="primary">Add to Cart</ion-button>
+        <ion-button ion-button color="primary">Buy</ion-button>
+      </ion-footer>
+    </ion-card>
+  </ion-virtual-scroll>
+</ion-content>
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Pull to Refresh</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <p>Pull this content down to trigger the refresh.</p>
+</ion-content> -->
